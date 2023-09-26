@@ -1,0 +1,159 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+vector<wchar_t> alpabet = { 'A','B','C','D','E','F','G','H','I','K'
+							,'L','M','N','O','P','Q','R','S','T','U',
+				    		'V','W','X','Y','Z' };
+vector<wchar_t> savekey;
+
+wchar_t map[5][5]; // 25
+
+int main()
+{
+	string key, msg;
+	int cnt = 0;
+
+	cin >> msg >> key;
+	for (int i = 0; i < key.length(); i++)
+	{
+		// 탐색할 곳, value / key값 탐색 동일-> first 반환 , key 탐색 실패 -> end반환
+		// -> 같은 문자가 있는지 탐색하여 없을경우에만 넣기 
+		if (find(savekey.begin(), savekey.end(), key[i]) == savekey.end()) 
+		{
+			savekey.push_back(key[i]); 
+		}
+	}
+
+	for (int i = 0; i < 25; i++)
+	{
+		if (find(savekey.begin(), savekey.end(), alpabet[i]) == savekey.end())
+		{
+			savekey.push_back(alpabet[i]);
+		}
+	}
+
+	for (int i = 0; i < 5; i++)
+		for (int j = 0; j < 5; j++)
+			map[i][j] = savekey[cnt++];    // 본 5x5에 맵핑 차례대로 해주기
+
+	msg.push_back('0'); // 마지막에 '0'문자 넣어서 짝수 홀수 확인하기위해 
+	int count = 0;
+	while (1)
+	{
+		if ('0' == msg[count + 1])  // 메세지 총 갯수가 홀수로 남으면 맨뒤에 무조건 X추가 
+		{
+			msg.erase(msg.find("0"));
+			msg += 'X';
+			break;
+		}
+		else if ('0' == msg[count]) // 메세지 총 갯수 짝수-> 0삭제
+		{
+			msg.erase(msg.find("0"));
+			break;
+		}
+		else if (msg[count] != msg[count + 1])  // 다르면 계속 
+		{
+			count += 2;
+		}
+		else if (msg[count] == msg[count + 1])  //같을때 
+		{
+			if ( msg[count] == 'X' && msg[count + 1] == 'X') // 둘다 X-> Q넣고 아님 X넣기 
+			{
+				msg.insert(msg.begin() + count + 1, 'Q');
+			}
+			else
+			msg.insert(msg.begin() + count + 1, 'X');
+			
+			count += 2;
+		}
+	}
+
+	count = 0;
+	int x1 = 0, y1 = 0, x2 = 0, y2 = 0; // 저장 좌표 
+	int flag1 = 0,flag2 = 0; 
+	while (1)
+	{
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (map[i][j] == msg[count])
+				{
+					x1 = i;
+					y1 = j;
+					flag1 = 1;
+				}
+				if (map[i][j] == msg[count + 1])
+				{
+					x2 = i;
+					y2 = j;
+					flag2 = 1;
+				}
+			}
+			if (flag1 == 1 && flag2==1) { // 2중포문 빨리 탈출하려고 -> study 중단점 찍었을때 너무 오래걸려서 개고생했음 
+				flag1=0,flag2=0;
+				break;
+			}
+		}
+	
+		
+		if (x1 == x2) // 같은 행 일때
+		{
+			//if (y1 == 4)
+			//{
+			//	y1 = 0;
+			//	y2++;
+			//}
+			//else if (y2 == 4 && y1 != 0) //예외처리 
+			//{
+			//	y2 = 0;
+			//	y1++;
+			//}
+			//else {
+			//	y1++, y2++;
+			//}
+
+			y1 = (y1 + 1) % 5;
+			y2 = (y2 + 1) % 5;
+
+			msg[count] = map[x1][y1];
+			msg[count + 1] = map[x2][y2];
+		}
+		else if (y1 == y2) //같은 열일때
+		{
+			
+			//if (x1 == 4)
+			//{
+			//	x1 = 0;
+			//	x2++;
+			//}
+			//else if (x2 == 4 && x1 != 0) //예외처리 
+			//{
+			//	x2 = 0;
+			//	x1++;
+			//}
+			//else {
+			//	x1++, x2++;
+			//}
+
+			x1 = (x1 + 1) % 5;
+			x2 = (x2 + 1) % 5;
+			msg[count] = map[x1][y1];
+			msg[count + 1] = map[x2][y2];
+		}
+		else // 서로 대각선으로 있을 때 
+		{
+			msg[count] = map[x1][y2];
+			msg[count + 1] = map[x2][y1];
+		}
+		count += 2;
+		if (count >= msg.size())
+			break;
+	}
+
+	cout << msg;
+
+	return 0;
+}
