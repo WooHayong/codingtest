@@ -1,0 +1,39 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+vector<int> solution(vector<string> wallpaper) {
+    vector<int> answer;
+    
+    vector<int> x;
+    vector <int>y;
+        int mx=0,my=0;   
+        int k=0;
+    
+    for(int i=0; i < wallpaper.size(); i++)
+        for(int j=0; j<wallpaper[0].size(); j++)
+              if(wallpaper[i][j] == '#'){
+                    x.push_back(i);
+                   y.push_back(j);
+                         k++;
+       }
+    
+
+    mx = *min_element(x.begin(),x.end());
+  
+    my = *min_element(y.begin(),y.end());
+    answer.push_back(mx);
+    answer.push_back(my);
+    
+   mx = *max_element(x.begin(),x.end())+1;
+
+    my= *max_element(y.begin(),y.end())+1;
+    
+    answer.push_back(mx);
+    answer.push_back(my);
+
+                  
+                  
+    return answer;
+}
