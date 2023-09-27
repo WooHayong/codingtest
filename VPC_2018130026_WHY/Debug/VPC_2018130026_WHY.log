@@ -1,0 +1,16 @@
+﻿  stdafx.cpp
+  VPC_2018130026_WHYDoc.cpp
+  VPC_2018130026_WHY.cpp
+  Resultdlg.cpp
+  MainFrm.cpp
+  ListenSocket.cpp
+  InputCellDlg.cpp
+  FinalServer.cpp
+c:\users\wooha\downloads\vpc_2018130026_why\finalserver.cpp(559): warning C4101: 'CFlag' :참조되지 않은 지역 변수입니다.
+c:\users\wooha\downloads\vpc_2018130026_why\finalserver.cpp(559): warning C4101: 'Bflag' :참조되지 않은 지역 변수입니다.
+c:\users\wooha\downloads\vpc_2018130026_why\finalserver.cpp(559): warning C4101: 'Aflag' :참조되지 않은 지역 변수입니다.
+c:\users\wooha\downloads\vpc_2018130026_why\finalserver.cpp(559): warning C4101: 'DFlag' :참조되지 않은 지역 변수입니다.
+  CildSocket.cpp
+  코드를 생성하고 있습니다...
+  VPC_2018130026_WHY.vcxproj -> C:\Users\wooha\Downloads\VPC_2018130026_WHY\Debug\VPC_2018130026_WHY.exe
+  VPC_2018130026_WHY.vcxproj -> C:\Users\wooha\Downloads\VPC_2018130026_WHY\Debug\VPC_2018130026_WHY.pdb (Partial PDB)
