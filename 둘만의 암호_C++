@@ -1,0 +1,27 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+string solution(string s, string skip, int index) {
+     string answer = ""; 
+     int num=0;
+     char c;
+    for(int i=0; i < s.size(); i++){
+        c = s[i];
+        num = (int)c;
+        for(int j = 0; j < index; j++){
+            num++;
+            if(num > 122)
+            num = 97;
+            for(int i=0; i < skip.size(); i++){
+            if(find(skip.begin(), skip.end(), num) != skip.end()) num++;
+            if(num > 122)
+                num = 97;
+            }
+        }
+         c = char(num);
+        answer.push_back(c);
+    
+    }
+    return answer;
+}
