@@ -1,0 +1,22 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string solution(vector<string> cards1, vector<string> cards2, vector<string> goal) {
+    string answer = "";
+    int num1= 0;
+    int num2= 0;
+    int num3=0;
+    for(int i=0; i<goal.size(); i++)
+    {
+        if(cards1.size()> num1 && cards1[num1]== goal[num3]) num1++;
+        else if(cards2.size()> num2 && cards2[num2]== goal[num3]) num2++;
+        else {    answer += "No"; break;}   
+        
+        num3++;
+    }
+    if(num3 == goal.size())
+    answer += "Yes";
+    return answer;
+}
