@@ -1,0 +1,22 @@
+#include <vector>
+#include <map>
+#include <unordered_set>
+#include <algorithm>
+using namespace std;
+
+int solution(vector<int> nums)
+{
+    int answer = 0;
+    unordered_set<int> ms;
+    
+    for(auto i : nums)
+    {
+        ms.insert(i);
+    }
+    
+    if(ms.size() > nums.size()/2 ) answer = nums.size()/2;
+    else answer = ms.size();
+    
+    
+    return answer;
+}
