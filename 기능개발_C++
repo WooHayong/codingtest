@@ -1,0 +1,41 @@
+#include <string>
+#include <vector>
+#include <queue>
+using namespace std;
+
+vector<int> solution(vector<int> progresses, vector<int> speeds) {
+    vector<int> answer;
+    queue<int> que;
+    int tmp=0;
+        int size = progresses.size();
+
+    for(int i=0; i<progresses.size(); i++)
+    {
+       int num = 100 - progresses[i];
+         tmp = num % speeds[i];
+        if(tmp == 0 )
+            que.push(num/speeds[i]);
+        else
+            que.push(num/speeds[i]+1);    
+    }
+  while(!que.empty()){
+        int cnt = 1;
+       int a = que.front(); 
+           que.pop();
+    for(int i=0; i < size; i++)
+    {
+       if(a >= que.front()) 
+         {   
+           if(que.empty()){
+               break;
+           }
+            que.pop();
+            cnt++;    
+         }   
+        else break; 
+    } 
+        answer.push_back(cnt);
+  }
+    
+    return answer;
+}
