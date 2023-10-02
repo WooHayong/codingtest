@@ -1,0 +1,48 @@
+#include<iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main(int argc, char** argv)
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	vector<int> save;
+	vector<int> test;
+
+	int N,M;
+	cin>> N>>M;
+	for(int i=0; i<N; i++)
+	{
+		int dis,val;
+		cin >> dis >> val;
+		for(int j=0; j<dis; j++)
+		{
+			save.push_back(val);
+		}
+	}
+	for(int i=0; i<M; i++)
+	{
+		int dis,val;
+		cin >> dis >> val;
+		for(int j=0; j<dis; j++)
+		{
+			test.push_back(val);
+		}
+	}
+int tmp = 0;
+int s=0;
+	for(int i=0; i < test.size(); i++)
+	{
+		 s = test[i] - save[i];
+		tmp = max(tmp,s); 
+	}
+
+	cout << tmp;
+
+
+	return 0;
+}
