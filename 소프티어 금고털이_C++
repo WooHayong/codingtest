@@ -1,0 +1,56 @@
+#include<iostream>
+#include <algorithm>
+#include<vector>
+ 
+using namespace std;
+bool com(pair<int, int> a, pair<int, int> b)
+{
+	return a.second > b.second;
+}
+int main(int argc, char** argv)
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	vector<pair<int,int>> m1; 
+
+	int W,N; 
+	cin >> W >> N; // 무게 , 종류 
+
+	for(int i = 0; i<N; i++)
+	{
+		int M,P ; 
+		cin >> M >> P; 
+		m1.push_back(make_pair(M,P));	
+	}
+	sort(m1.begin(), m1.end(),com );
+
+	int sum = 0;
+	int tmp = 0;
+int k=0; 
+	while( W!=0 )	
+	{
+		
+		tmp = W;
+
+		if(tmp > m1[k].first ) 
+		{
+		
+		   sum += m1[k].first * m1[k].second;
+		   W = W - m1[k].first;
+			 k++;
+		}
+		else if( tmp <= m1[k].first)
+		{
+			sum += W * m1[k].second;
+
+			W=0;
+			 k++;
+			
+		}
+		
+	}	
+	cout << sum;
+	return 0;
+}
