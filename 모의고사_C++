@@ -1,0 +1,46 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+// 12345 12345 
+// 21 23 24 25    21 23 24 25
+// 33 11 22 44 55   33 11 22 44 55
+
+vector<int> solution(vector<int> answers) {
+    vector<int> answer;
+    
+    vector<int> one = {1,2,3,4,5};
+    vector<int> two = {2,1,2,3,2,4,2,5};
+    vector<int> three = {3,3,1,1,2,2,4,4,5,5};
+    vector<int> tmp;
+    
+    int j=0,k=0,h=0;
+    int acnt=0,bcnt=0,ccnt=0;
+    for(int i =0 ; i< answers.size(); i++) 
+    {
+        if(answers[i] == one[j]) 
+              acnt++;  
+         if(answers[i] == two[k]) 
+              bcnt++;  
+         if(answers[i] == three[h]) 
+              ccnt++;  
+        
+        j++;h++;k++;
+        
+        if(j==5) j=0;
+        if(k==8) k=0;
+        if(h==10) h=0;
+    }
+            tmp.push_back(acnt);
+      tmp.push_back(bcnt);
+            tmp.push_back(ccnt);
+    
+     int top =  *max_element(tmp.begin(),tmp.end());
+            for(int i =0; i<tmp.size(); i++)
+            {   
+                if(top == tmp[i])
+                    answer.push_back(i+1);
+            }
+        
+    return answer;
+}
