@@ -1,0 +1,48 @@
+#include<iostream>
+#include <vector>
+#include <cmath>
+#include<algorithm> 
+using namespace std;
+int N,M,K;
+int ans = 2147483647;
+
+int main(int argc, char** argv)
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL); 
+	cin >> N >> M >> K;
+	int lail;
+	vector<int> lail_num;
+	for(int i=0; i<N;i++)
+	{
+		cin>>lail;
+		lail_num.push_back(lail);
+	}
+	int tmp=0;
+	int sum=0;
+
+	sort(lail_num.begin(),lail_num.end());
+
+	do{
+		int j=0; sum=0; 
+		for(int i=0; i<K; i++ )
+		{
+			sum=0;
+			while(sum + lail_num[j] <= M ){
+	 		
+				sum += lail_num[j];
+					j= (j+1) % N;
+				}
+				tmp += sum;
+				
+
+		}
+			
+    		 ans = min(tmp , ans);
+			 tmp=0;
+	}while(next_permutation(lail_num.begin(),lail_num.end()));
+	
+	cout << ans;
+	return 0;
+}
