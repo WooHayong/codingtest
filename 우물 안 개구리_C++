@@ -1,0 +1,61 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+long long N,M;
+	vector<pair<long long,long long>> weight;
+	vector<pair<long long,long long>> com;
+long long w;	
+	long long a,b;
+
+int main(int argc, char** argv)
+{
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(NULL);
+
+
+	cin	>>	N	>>	M;
+	long long answer=0;
+
+	for(long long i=0; i<N; i++)
+	{
+		cin >> w;
+		weight.push_back(make_pair(w,0));
+	}
+
+	for(long long i=0; i<M;i++)
+	{
+		cin>>a>>b;
+		com.push_back(make_pair(a,b));
+	}
+	for(long long i=0; i<M; i++)
+	{
+		long long f = com[i].first - 1;
+		long long s = com[i].second - 1;
+		
+		if( (weight[f].first > weight[s].first) && (weight[f].second !=2) )
+		{		
+			weight[f].second = 1;	
+			weight[s].second = 2;
+		}		
+		else if((weight[f].first < weight[s].first) && (weight[s].second !=2))
+		{
+			weight[f].second = 2;	
+			weight[s].second = 1;
+		}
+		else
+		{
+			weight[f].second = 2;	
+			weight[s].second = 2;
+		}
+	}
+		long long ans=0;
+	for(long long i=0; i < N; i++)
+	{
+		if( weight[i].second == 0 || weight[i].second == 1) 
+			ans++;		
+	}
+	cout<<ans;
+	return 0;
+}
